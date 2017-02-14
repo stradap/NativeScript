@@ -113,5 +113,6 @@ export const itemsProperty = new Property<SegmentedBarBase, SegmentedBarItemDefi
 });
 itemsProperty.register(SegmentedBarBase);
 
+// TODO: make this non inheritable again
 export const selectedBackgroundColorProperty = new InheritedCssProperty<Style, Color>({ name: "selectedBackgroundColor", cssName: "selected-background-color", equalityComparer: Color.equals, valueConverter: (v) => new Color(v) });
 selectedBackgroundColorProperty.register(Style);

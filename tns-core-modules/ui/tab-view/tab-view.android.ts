@@ -62,17 +62,6 @@ export class TabViewItem extends TabViewItemBase {
         const result = getTransformedText(this.title, value);
         tv.setText(result);
     }
-
-    get [tabTextColorProperty.native](): android.content.res.ColorStateList {
-        return this.nativeView.getTextColors();
-    }
-    set [tabTextColorProperty.native](value: android.content.res.ColorStateList | Color) {
-        if (value instanceof Color) {
-            this.nativeView.setTextColor(value.android);
-        } else {
-            this.nativeView.setTextColor(value);
-        }
-    }
 }
 
 let PagerAdapterClass;
@@ -381,12 +370,20 @@ export class TabView extends TabViewBase {
         }
     }
 
+    get [tabTextColorProperty.native](): number {
+        return this._tabLayout.getTabTextColor();
+    }
+    set [tabTextColorProperty.native](value: number | Color) {
+        let color = value instanceof Color ? value.android : value;
+        this._tabLayout.setTabTextColor(color);
+    }
+
     get [selectedTabTextColorProperty.native](): number {
         return this._tabLayout.getSelectedTabTextColor();
     }
     set [selectedTabTextColorProperty.native](value: number | Color) {
         let color = value instanceof Color ? value.android : value;
-        this._tabLayout.setTabTextColor(color);
+        this._tabLayout.setSelectedTabTextColor(color);
     }
 
     get [androidSelectedTabHighlightColorProperty.native](): number {
